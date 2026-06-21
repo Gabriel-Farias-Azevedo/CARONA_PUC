@@ -16,8 +16,6 @@ testes unitários com **Pytest**.
 3. Como motorista, quero **oferecer uma carona** (origem, destino, data/hora, vagas e valor).
 4. Como passageiro, quero **buscar caronas disponíveis** e **reservar uma vaga**.
 5. Como passageiro, quero **cancelar uma reserva** e liberar a vaga.
-6. Como motorista, quero **ver as caronas que ofereci**.
-7. Como estudante, quero **editar meu perfil** (nome, curso, telefone).
 
 Entidades de domínio: **User**, **Ride** (carona) e **Reservation** (reserva).
 
