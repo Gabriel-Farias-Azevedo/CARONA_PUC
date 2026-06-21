@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="form-card">
+    <h2>Entrar</h2>
+    <form method="post" action="{{ url_for('auth.login') }}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <label>E-mail
+            <input type="email" name="email" required autofocus placeholder="seuemail@aluno.puc-rio.br">
+        </label>
+        <label>Senha
+            <input type="password" name="password" required>
+        </label>
+        <button class="btn" type="submit">Entrar</button>
+    </form>
+    <p class="muted" style="margin-top:16px">Ainda não tem conta? <a href="{{ url_for('auth.show_register') }}">Criar conta</a></p>
+</section>
+{% endblock %}

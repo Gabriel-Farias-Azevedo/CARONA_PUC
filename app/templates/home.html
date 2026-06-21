@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="hero">
+    <h1>Caronas entre estudantes da PUC-Rio</h1>
+    <p>Ofereça uma vaga no seu carro ou encontre uma carona até a universidade. Mais barato, mais prático e mais colaborativo.</p>
+    <div class="cta">
+        <a class="btn" href="{{ url_for('auth.show_register') }}">Criar conta</a>
+        <a class="btn ghost" href="{{ url_for('auth.show_login') }}">Já tenho conta</a>
+    </div>
+</section>
+
+<section class="features">
+    <div class="card">
+        <h3>💸 Divida os custos</h3>
+        <p>Compartilhe combustível e estacionamento com quem faz o mesmo trajeto até a PUC.</p>
+    </div>
+    <div class="card">
+        <h3>🔎 Ache trajetos</h3>
+        <p>Busque caronas por bairro de origem e horário compatível com as suas aulas.</p>
+    </div>
+    <div class="card">
+        <h3>🤝 Comunidade PUC</h3>
+        <p>Caronas entre colegas da universidade, de forma simples e rápida.</p>
+    </div>
+</section>
+{% endblock %}

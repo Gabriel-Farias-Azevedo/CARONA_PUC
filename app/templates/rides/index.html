@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="page-head">
+    <h2>Caronas disponíveis</h2>
+    <a class="btn" href="{{ url_for('rides.create') }}">+ Oferecer carona</a>
+</section>
+
+<form method="get" action="{{ url_for('rides.index') }}" class="search">
+    <input type="text" name="busca" value="{{ search or '' }}" placeholder="Buscar por bairro de origem ou destino...">
+    <button class="btn ghost" type="submit">Buscar</button>
+</form>
+
+{% if not rides %}
+    <p class="empty">Nenhuma carona disponível no momento. Que tal <a href="{{ url_for('rides.create') }}">oferecer uma</a>?</p>
+{% else %}
+    <div class="ride-list">
+        {% for ride in rides %}
+            <article class="ride">
+                <div class="route">
+                    <strong>{{ ride.origin }}</strong>
+                    <span class="arrow">→</span>
+                    <strong>{{ ride.destination }}</strong>
+                </div>
+                <ul class="ride-meta">
+                    <li>🗓️ {{ ride.departure_at|fmt_dt }}</li>
+                    <li>🧑 {{ ride.driver_name }}</li>
+                    <li>💺 {{ ride.seats_available() }} vaga(s)</li>
+                    <li>💰 {{ 'Grátis' if ride.is_free() else (ride.price_per_seat|brl ~ ' / pessoa') }}</li>
+                </ul>
+                <form method="post" action="{{ url_for('reservations.store', ride_id=ride.id) }}">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <button class="btn" type="submit">Reservar vaga</button>
+                </form>
+            </article>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

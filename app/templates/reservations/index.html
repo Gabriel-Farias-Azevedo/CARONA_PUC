@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block content %}
+<h2>Minhas reservas</h2>
+
+{% if not reservations %}
+    <p class="empty">Você ainda não reservou caronas. <a href="{{ url_for('rides.index') }}">Buscar caronas</a>.</p>
+{% else %}
+    <div class="ride-list">
+        {% for res in reservations %}
+            {% set ride = res.ride %}
+            <article class="ride {{ '' if res.is_active() else 'is-cancelled' }}">
+                <div class="route">
+                    <strong>{{ ride.origin }}</strong>
+                    <span class="arrow">→</span>
+                    <strong>{{ ride.destination }}</strong>
+                </div>
+                <ul class="ride-meta">
+                    <li>🗓️ {{ ride.departure_at|fmt_dt }}</li>
+                    <li>🧑 Motorista: {{ ride.driver_name }}</li>
+                    {% if ride.driver_phone %}
+                        <li>📞 Telefone:
+                            <a href="https://wa.me/55{{ ride.driver_phone|digits }}" target="_blank">
+                                {{ ride.driver_phone }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li>💰 {{ 'Grátis' if ride.is_free() else (ride.price_per_seat|brl ~ ' / pessoa') }}</li>
+                </ul>
+                {% if res.is_active() %}
+                    <form method="post" action="{{ url_for('reservations.cancel', reservation_id=res.id) }}"
+                          onsubmit="return confirm('Cancelar esta reserva?');">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <button class="btn danger" type="submit">Cancelar reserva</button>
+                    </form>
+                {% else %}
+                    <span class="badge full">Cancelada</span>
+                {% endif %}
+            </article>
+        {% endfor %}
+    </div>
+{% endif %}
+{% endblock %}

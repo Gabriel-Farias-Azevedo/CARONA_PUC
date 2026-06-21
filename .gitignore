@@ -1,0 +1,10 @@
+# Banco SQLite gerado em runtime -- não versionar dados locais
+/storage/*.sqlite
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/

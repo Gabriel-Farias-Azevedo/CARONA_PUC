@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block content %}
+<section class="form-card wide">
+    <h2>Oferecer carona</h2>
+    <form method="post" action="{{ url_for('rides.store') }}">
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        <div class="grid2">
+            <label>Origem (bairro / ponto de partida)
+                <input type="text" name="origin" required value="{{ old.get('origin', '') }}" placeholder="Ex.: Barra da Tijuca">
+            </label>
+            <label>Destino
+                <input type="text" name="destination" required value="{{ old.get('destination', 'PUC-Rio (Gávea)') }}">
+            </label>
+            <label>Data e horário
+                <input type="datetime-local" name="departure_at" required step="60" value="{{ old.get('departure_at', '') }}">
+            </label>
+            <label>Vagas disponíveis
+                <input type="number" name="seats_total" required min="1" max="8" value="{{ old.get('seats_total', '3') }}">
+            </label>
+            <label>Valor por pessoa (R$)
+                <input type="text" name="price_per_seat" inputmode="decimal" value="{{ old.get('price_per_seat', '0') }}" placeholder="0,00">
+            </label>
+        </div>
+        <button class="btn" type="submit">Publicar carona</button>
+    </form>
+</section>
+{% endblock %}
