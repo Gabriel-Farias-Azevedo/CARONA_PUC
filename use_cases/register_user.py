@@ -42,9 +42,13 @@ class RegisterUserUseCase:
         if not EMAIL_PATTERN.match(email):
             errors.append("Informe um e-mail válido.")
         if not email.endswith(ALLOWED_EMAIL_DOMAIN):
-            errors.append(f"O e-mail deve ser um endereço válido {ALLOWED_EMAIL_DOMAIN}")
+            errors.append(
+                f"O e-mail deve ser um endereço válido {ALLOWED_EMAIL_DOMAIN}"
+            )
         if len(password) < MIN_PASSWORD_LENGTH:
-            errors.append(f"A senha deve ter ao menos {MIN_PASSWORD_LENGTH} caracteres.")
+            errors.append(
+                f"A senha deve ter ao menos {MIN_PASSWORD_LENGTH} caracteres."
+            )
         if ddd.strip() != "" and phone.strip() == "":
             errors.append("Se informar o DDD, informe também o número do telefone.")
 

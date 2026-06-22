@@ -10,7 +10,8 @@ from app.routes.auth_routes import bp as auth_bp
 from app.routes.home_routes import bp as home_bp
 from app.routes.reservation_routes import bp as reservation_bp
 from app.routes.ride_routes import bp as ride_bp
-from app.template_filters import format_currency_brl, format_datetime_br, only_digits
+from app.template_filters import (format_currency_brl, format_datetime_br,
+                                  only_digits)
 from infra.db.database import get_connection, init_db
 
 

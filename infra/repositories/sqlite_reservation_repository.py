@@ -35,7 +35,9 @@ class SqliteReservationRepository(ReservationRepository):
         ).fetchone()
         return self._hydrate(row) if row else None
 
-    def active_reservation(self, ride_id: int, passenger_id: int) -> Optional[Reservation]:
+    def active_reservation(
+        self, ride_id: int, passenger_id: int
+    ) -> Optional[Reservation]:
         row = self._conn.execute(
             "SELECT * FROM reservations WHERE ride_id = ? AND passenger_id = ? AND status = ?",
             (ride_id, passenger_id, Reservation.ACTIVE),

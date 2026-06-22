@@ -1,4 +1,5 @@
-from flask import Blueprint, current_app, flash, redirect, render_template, url_for
+from flask import (Blueprint, current_app, flash, redirect, render_template,
+                   url_for)
 
 from app.auth import current_user, login_required
 from use_cases.exceptions import ValidationError

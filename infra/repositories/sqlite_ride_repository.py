@@ -34,7 +34,9 @@ class SqliteRideRepository(RideRepository):
         return self.find_by_id(cursor.lastrowid)
 
     def find_by_id(self, ride_id: int) -> Optional[Ride]:
-        row = self._conn.execute(_BASE_SELECT + " WHERE r.id = ?", (ride_id,)).fetchone()
+        row = self._conn.execute(
+            _BASE_SELECT + " WHERE r.id = ?", (ride_id,)
+        ).fetchone()
         return self._hydrate(row) if row else None
 
     def available(self, search: str, exclude_driver_id: int) -> list[Ride]:
@@ -58,7 +60,8 @@ class SqliteRideRepository(RideRepository):
 
     def by_driver(self, driver_id: int) -> list[Ride]:
         rows = self._conn.execute(
-            _BASE_SELECT + " WHERE r.driver_id = ? ORDER BY r.departure_at DESC", (driver_id,)
+            _BASE_SELECT + " WHERE r.driver_id = ? ORDER BY r.departure_at DESC",
+            (driver_id,),
         ).fetchall()
         return [self._hydrate(row) for row in rows]
 

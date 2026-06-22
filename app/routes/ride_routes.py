@@ -1,4 +1,5 @@
-from flask import Blueprint, current_app, flash, redirect, render_template, request, session, url_for
+from flask import (Blueprint, current_app, flash, redirect, render_template,
+                   request, session, url_for)
 
 from app.auth import current_user, login_required
 from use_cases.exceptions import ValidationError
@@ -43,4 +44,3 @@ def store():
         flash(e.as_text(), "error")
         session["old"] = request.form.to_dict()
         return redirect(url_for("rides.create"))
-

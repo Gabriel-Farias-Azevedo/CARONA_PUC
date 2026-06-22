@@ -9,12 +9,8 @@ from typing import Optional
 from domain.reservation import Reservation
 from domain.ride import Ride
 from domain.user import User
-from use_cases.repositories import (
-    ReservationRepository,
-    RideRepository,
-    TransactionManager,
-    UserRepository,
-)
+from use_cases.repositories import (ReservationRepository, RideRepository,
+                                    TransactionManager, UserRepository)
 
 
 class FakeUserRepository(UserRepository):
@@ -60,7 +56,11 @@ class FakeRideRepository(RideRepository):
         ]
         if search:
             term = search.lower()
-            results = [r for r in results if term in r.origin.lower() or term in r.destination.lower()]
+            results = [
+                r
+                for r in results
+                if term in r.origin.lower() or term in r.destination.lower()
+            ]
         return sorted(results, key=lambda r: r.departure_at)
 
     def by_driver(self, driver_id: int) -> list[Ride]:
@@ -99,22 +99,30 @@ class FakeReservationRepository(ReservationRepository):
     def find_by_id(self, reservation_id: int) -> Optional[Reservation]:
         return self._reservations.get(reservation_id)
 
-    def active_reservation(self, ride_id: int, passenger_id: int) -> Optional[Reservation]:
+    def active_reservation(
+        self, ride_id: int, passenger_id: int
+    ) -> Optional[Reservation]:
         return next(
             (
                 r
                 for r in self._reservations.values()
-                if r.ride_id == ride_id and r.passenger_id == passenger_id and r.is_active()
+                if r.ride_id == ride_id
+                and r.passenger_id == passenger_id
+                and r.is_active()
             ),
             None,
         )
 
     def cancel(self, reservation_id: int) -> None:
         current = self._reservations[reservation_id]
-        self._reservations[reservation_id] = replace(current, status=Reservation.CANCELLED)
+        self._reservations[reservation_id] = replace(
+            current, status=Reservation.CANCELLED
+        )
 
     def by_passenger(self, passenger_id: int) -> list[Reservation]:
-        return [r for r in self._reservations.values() if r.passenger_id == passenger_id]
+        return [
+            r for r in self._reservations.values() if r.passenger_id == passenger_id
+        ]
 
 
 class FakeTransactionManager(TransactionManager):

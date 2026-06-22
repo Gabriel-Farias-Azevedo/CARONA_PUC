@@ -2,12 +2,14 @@ import sqlite3
 from dataclasses import dataclass
 
 from infra.db.transaction import SqliteTransactionManager
-from infra.repositories.sqlite_reservation_repository import SqliteReservationRepository
+from infra.repositories.sqlite_reservation_repository import \
+    SqliteReservationRepository
 from infra.repositories.sqlite_ride_repository import SqliteRideRepository
 from infra.repositories.sqlite_user_repository import SqliteUserRepository
 from use_cases.cancel_reservation import CancelReservationUseCase
 from use_cases.list_available_rides import ListAvailableRidesUseCase
-from use_cases.list_reservations_by_passenger import ListReservationsByPassengerUseCase
+from use_cases.list_reservations_by_passenger import \
+    ListReservationsByPassengerUseCase
 from use_cases.offer_ride import OfferRideUseCase
 from use_cases.register_user import RegisterUserUseCase
 from use_cases.reserve_ride import ReserveRideUseCase
@@ -47,5 +49,7 @@ class Container:
             list_available_rides=ListAvailableRidesUseCase(rides),
             reserve_ride=ReserveRideUseCase(rides, reservations, tx),
             cancel_reservation=CancelReservationUseCase(rides, reservations, tx),
-            list_reservations_by_passenger=ListReservationsByPassengerUseCase(reservations),
+            list_reservations_by_passenger=ListReservationsByPassengerUseCase(
+                reservations
+            ),
         )

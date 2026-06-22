@@ -21,4 +21,7 @@ def validate_csrf_or_abort() -> None:
     sent = request.form.get("_token", "")
     expected = session.get("_csrf", "")
     if not expected or not hmac.compare_digest(expected, sent):
-        abort(400, description="Sessão expirada. Volte à página anterior e tente novamente.")
+        abort(
+            400,
+            description="Sessão expirada. Volte à página anterior e tente novamente.",
+        )

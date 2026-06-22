@@ -10,11 +10,15 @@ class SqliteUserRepository(UserRepository):
         self._conn = conn
 
     def find_by_email(self, email: str) -> Optional[User]:
-        row = self._conn.execute("SELECT * FROM users WHERE email = ?", (email,)).fetchone()
+        row = self._conn.execute(
+            "SELECT * FROM users WHERE email = ?", (email,)
+        ).fetchone()
         return self._hydrate(row) if row else None
 
     def find_by_id(self, user_id: int) -> Optional[User]:
-        row = self._conn.execute("SELECT * FROM users WHERE id = ?", (user_id,)).fetchone()
+        row = self._conn.execute(
+            "SELECT * FROM users WHERE id = ?", (user_id,)
+        ).fetchone()
         return self._hydrate(row) if row else None
 
     def save(self, user: User) -> User:

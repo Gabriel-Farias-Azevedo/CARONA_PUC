@@ -1,7 +1,7 @@
 from functools import wraps
 from typing import Optional
 
-from flask import current_app, flash, g, redirect, session, url_for
+from flask import current_app, g, redirect, session, url_for
 
 from domain.user import User
 

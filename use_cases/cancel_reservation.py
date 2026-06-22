@@ -1,5 +1,6 @@
 from use_cases.exceptions import ValidationError
-from use_cases.repositories import ReservationRepository, RideRepository, TransactionManager
+from use_cases.repositories import (ReservationRepository, RideRepository,
+                                    TransactionManager)
 
 
 class CancelReservationUseCase:

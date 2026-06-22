@@ -1,4 +1,5 @@
-from flask import Blueprint, current_app, flash, redirect, render_template, request, session, url_for
+from flask import (Blueprint, current_app, flash, redirect, render_template,
+                   request, session, url_for)
 
 from app.auth import current_user, login_user, logout_user
 from app.constants import BRAZILIAN_DDDS

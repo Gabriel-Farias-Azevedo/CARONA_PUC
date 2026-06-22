@@ -2,11 +2,8 @@ from datetime import datetime, timedelta
 
 import pytest
 
-from tests.use_cases.fakes import (
-    FakeReservationRepository,
-    FakeRideRepository,
-    FakeTransactionManager,
-)
+from tests.use_cases.fakes import (FakeReservationRepository,
+                                   FakeRideRepository, FakeTransactionManager)
 from use_cases.cancel_reservation import CancelReservationUseCase
 from use_cases.exceptions import ValidationError
 from use_cases.offer_ride import OfferRideUseCase
@@ -29,14 +26,18 @@ def _setup_active_reservation(seats=1):
     )
     reservations_repo = FakeReservationRepository()
     tx = FakeTransactionManager()
-    reservation = ReserveRideUseCase(rides_repo, reservations_repo, tx).execute(ride.id, passenger_id=2)
+    reservation = ReserveRideUseCase(rides_repo, reservations_repo, tx).execute(
+        ride.id, passenger_id=2
+    )
     return rides_repo, reservations_repo, tx, ride, reservation
 
 
 def test_cancels_an_active_reservation_and_releases_the_seat():
     rides_repo, reservations_repo, tx, ride, reservation = _setup_active_reservation()
 
-    CancelReservationUseCase(rides_repo, reservations_repo, tx).execute(reservation.id, passenger_id=2)
+    CancelReservationUseCase(rides_repo, reservations_repo, tx).execute(
+        reservation.id, passenger_id=2
+    )
 
     assert rides_repo.find_by_id(ride.id).seats_taken == 0
     assert not reservations_repo.find_by_id(reservation.id).is_active()
@@ -46,7 +47,9 @@ def test_rejects_cancelling_someone_elses_reservation():
     rides_repo, reservations_repo, tx, _ride, reservation = _setup_active_reservation()
 
     with pytest.raises(ValidationError):
-        CancelReservationUseCase(rides_repo, reservations_repo, tx).execute(reservation.id, passenger_id=99)
+        CancelReservationUseCase(rides_repo, reservations_repo, tx).execute(
+            reservation.id, passenger_id=99
+        )
 
 
 def test_rejects_cancelling_twice():
