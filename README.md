@@ -12,10 +12,9 @@ testes unitários com **Pytest**.
 ## Histórias de usuário implementadas
 
 1. Como estudante, quero **me cadastrar com e-mail `@aluno.puc-rio.br`** para acessar a plataforma.
-2. Como estudante, quero **entrar e sair** da minha conta.
-3. Como motorista, quero **oferecer uma carona** (origem, destino, data/hora, vagas e valor).
-4. Como passageiro, quero **buscar caronas disponíveis** e **reservar uma vaga**.
-5. Como passageiro, quero **cancelar uma reserva** e liberar a vaga.
+2. Como motorista, quero **oferecer uma carona** (origem, destino, data/hora, vagas e valor).
+3. Como passageiro, quero **buscar caronas disponíveis** e **reservar uma vaga**.
+4. Como passageiro, quero **cancelar uma reserva** e liberar a vaga.
 
 Entidades de domínio: **User**, **Ride** (carona) e **Reservation** (reserva).
 
@@ -66,14 +65,10 @@ app-caronas/
 │   ├── repositories.py        # Interfaces: UserRepository, RideRepository, ReservationRepository, TransactionManager
 │   ├── exceptions.py           # ValidationError
 │   ├── register_user.py
-│   ├── login_user.py
-│   ├── update_profile.py
 │   ├── offer_ride.py
 │   ├── list_available_rides.py
-│   ├── list_rides_by_driver.py
 │   ├── reserve_ride.py
-│   ├── cancel_reservation.py
-│   └── list_reservations_by_passenger.py
+│   └── cancel_reservation.py
 │
 ├── infra/                   # Frameworks e Ferramentas Externas: implementação concreta com SQLite
 │   ├── db/

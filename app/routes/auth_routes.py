@@ -7,27 +7,6 @@ from use_cases.exceptions import ValidationError
 bp = Blueprint("auth", __name__)
 
 
-@bp.route("/login", methods=["GET"])
-def show_login():
-    if current_user() is not None:
-        return redirect(url_for("rides.index"))
-    return render_template("auth/login.html")
-
-
-@bp.route("/login", methods=["POST"])
-def login():
-    try:
-        user = current_app.container.login_user.execute(
-            request.form.get("email", ""),
-            request.form.get("password", ""),
-        )
-        login_user(user)
-        return redirect(url_for("rides.index"))
-    except ValidationError as e:
-        flash(e.as_text(), "error")
-        return redirect(url_for("auth.show_login"))
-
-
 @bp.route("/registrar", methods=["GET"])
 def show_register():
     if current_user() is not None:
@@ -63,4 +42,4 @@ def register():
 @bp.route("/logout", methods=["POST"])
 def logout():
     logout_user()
-    return redirect(url_for("auth.show_login"))
+    return redirect(url_for("auth.show_register"))

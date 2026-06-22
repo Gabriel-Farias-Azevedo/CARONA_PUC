@@ -8,7 +8,6 @@ from app.container import Container
 from app.csrf import csrf_token, validate_csrf_or_abort
 from app.routes.auth_routes import bp as auth_bp
 from app.routes.home_routes import bp as home_bp
-from app.routes.profile_routes import bp as profile_bp
 from app.routes.reservation_routes import bp as reservation_bp
 from app.routes.ride_routes import bp as ride_bp
 from app.template_filters import format_currency_brl, format_datetime_br, only_digits
@@ -34,7 +33,6 @@ def create_app(db_path: Optional[str] = None) -> Flask:
     app.register_blueprint(auth_bp)
     app.register_blueprint(ride_bp)
     app.register_blueprint(reservation_bp)
-    app.register_blueprint(profile_bp)
 
     app.jinja_env.filters["fmt_dt"] = format_datetime_br
     app.jinja_env.filters["brl"] = format_currency_brl

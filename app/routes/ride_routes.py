@@ -38,16 +38,9 @@ def store():
             },
         )
         flash("Carona publicada com sucesso!", "success")
-        return redirect(url_for("rides.mine"))
+        return redirect(url_for("rides.index"))
     except ValidationError as e:
         flash(e.as_text(), "error")
         session["old"] = request.form.to_dict()
         return redirect(url_for("rides.create"))
 
-
-@bp.route("/caronas/minhas", methods=["GET"])
-@login_required
-def mine():
-    user = current_user()
-    rides = current_app.container.list_rides_by_driver.execute(user.id)
-    return render_template("rides/mine.html", rides=rides)

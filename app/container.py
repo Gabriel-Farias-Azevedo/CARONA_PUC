@@ -8,12 +8,9 @@ from infra.repositories.sqlite_user_repository import SqliteUserRepository
 from use_cases.cancel_reservation import CancelReservationUseCase
 from use_cases.list_available_rides import ListAvailableRidesUseCase
 from use_cases.list_reservations_by_passenger import ListReservationsByPassengerUseCase
-from use_cases.list_rides_by_driver import ListRidesByDriverUseCase
-from use_cases.login_user import LoginUserUseCase
 from use_cases.offer_ride import OfferRideUseCase
 from use_cases.register_user import RegisterUserUseCase
 from use_cases.reserve_ride import ReserveRideUseCase
-from use_cases.update_profile import UpdateProfileUseCase
 
 
 @dataclass
@@ -28,11 +25,8 @@ class Container:
     reservations: SqliteReservationRepository
 
     register_user: RegisterUserUseCase
-    login_user: LoginUserUseCase
-    update_profile: UpdateProfileUseCase
     offer_ride: OfferRideUseCase
     list_available_rides: ListAvailableRidesUseCase
-    list_rides_by_driver: ListRidesByDriverUseCase
     reserve_ride: ReserveRideUseCase
     cancel_reservation: CancelReservationUseCase
     list_reservations_by_passenger: ListReservationsByPassengerUseCase
@@ -49,11 +43,8 @@ class Container:
             rides=rides,
             reservations=reservations,
             register_user=RegisterUserUseCase(users),
-            login_user=LoginUserUseCase(users),
-            update_profile=UpdateProfileUseCase(users),
             offer_ride=OfferRideUseCase(rides),
             list_available_rides=ListAvailableRidesUseCase(rides),
-            list_rides_by_driver=ListRidesByDriverUseCase(rides),
             reserve_ride=ReserveRideUseCase(rides, reservations, tx),
             cancel_reservation=CancelReservationUseCase(rides, reservations, tx),
             list_reservations_by_passenger=ListReservationsByPassengerUseCase(reservations),

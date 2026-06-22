@@ -38,8 +38,7 @@ def login_required(view_func):
     @wraps(view_func)
     def wrapped(*args, **kwargs):
         if current_user() is None:
-            flash("Faça login para continuar.", "error")
-            return redirect(url_for("auth.show_login"))
+            return redirect(url_for("auth.show_register"))
         return view_func(*args, **kwargs)
 
     return wrapped

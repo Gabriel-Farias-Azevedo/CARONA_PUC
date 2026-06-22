@@ -143,15 +143,13 @@
             {% if current_user %}
                 <a href="{{ url_for('rides.index') }}">Buscar caronas</a>
                 <a href="{{ url_for('rides.create') }}">Oferecer carona</a>
-                <a href="{{ url_for('rides.mine') }}">Minhas caronas</a>
                 <a href="{{ url_for('reservations.index') }}">Minhas reservas</a>
-                <a href="{{ url_for('profile.edit') }}" class="user-link">Olá, {{ current_user.first_name() }}</a>
+                <span class="user-link">Olá, {{ current_user.first_name() }}</span>
                 <form method="post" action="{{ url_for('auth.logout') }}" class="inline">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <button class="link-btn" type="submit">Sair</button>
                 </form>
             {% else %}
-                <a href="{{ url_for('auth.show_login') }}">Entrar</a>
                 <a href="{{ url_for('auth.show_register') }}" class="btn-sm">Criar conta</a>
             {% endif %}
         </nav>
